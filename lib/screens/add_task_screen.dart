@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final textFieldController = TextEditingController();
+  final Function addTaskCallback;
+
+  AddTaskScreen({this.addTaskCallback});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,6 +28,7 @@ class AddTaskScreen extends StatelessWidget {
               ),
               TextField(
                 autofocus: true,
+                controller: textFieldController,
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -30,7 +36,11 @@ class AddTaskScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
-                    print("pressed flat button");
+                    if (textFieldController.text.isNotEmpty) {
+                      print("saving task: " + textFieldController.text);
+                      addTaskCallback(textFieldController.text);
+                      textFieldController.clear();
+                    }
                   },
                   child: Text(
                     "Click me",
