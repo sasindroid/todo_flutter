@@ -17,9 +17,6 @@ class TasksScreen extends StatelessWidget {
             context: context,
             builder: (context) => AddTaskScreen(
               addTaskCallback: (taskName) {
-                // setState(() {
-                //   tasks.add(Task(name: taskName));
-                // });
                 context.read<TaskData>().addTask(Task(name: taskName));
                 Navigator.pop(context);
               },
@@ -57,7 +54,7 @@ class TasksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${context.watch<TaskData>().tasks.length} tasks',
+                  '${context.watch<TaskData>().taskCount} tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
